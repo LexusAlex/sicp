@@ -9,6 +9,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yqq racket && \
     raco pkg install --scope installation rackunit && \
-    raco pkg install --scope installation sicp
+    raco pkg install --scope installation sicp && \
+    apt-get install php-cli -y && \
+    apt-get install composer -y
 
 WORKDIR /sicp
