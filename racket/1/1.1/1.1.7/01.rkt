@@ -39,3 +39,5 @@
 
 
 (check-equal? (sqrt 9) 3.00009155413138)
+(check-equal? (sqrt 4) 2.0000000929222947)
+(check-equal? (sqrt 137) 11.704699917758145)
