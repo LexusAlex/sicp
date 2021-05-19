@@ -7,6 +7,7 @@
 ; 2! = 2 * 1 = 2
 ; 3! = 3 * 2 * 1 = 6
 
+; линейно-рекурсивный процесс
 (define (factorial n)
     (if (= n 1)
         1
@@ -19,8 +20,42 @@
 ; 2. if (= 6 1) проверка на равенство, в данном случае не равно
 ; 3. factorial (- 6 1) уменьшаем значение n на 1
 ; 4. (* 6 (factorial (- 6 1)) - далее идем к шагу 2, до тех пор пока условие не совпадет
+; процесс строит цепочку отложенных операций, сначала расширение, а затем сжатие. Сжатие происходит тогда когда выполняется цепочка отложенных операций.
+; Это называется линейно рекурсивным процессом. При таком процессе интерпретатор должен помнить все операции отложенных вызовов. Рост операций происходит линейно.
 
-; перепишем нашу процедуру в линейно итеративный процесс
+
+; линейно итеративный процесс
+(define (factorial2 n)
+    (define (iter product counter)
+        (if (> counter n)
+            product
+            (iter (* counter product)
+                (+ counter 1)
+            )
+        )
+    )
+    (iter 1 1)
+)
+
+(define (factorial3 n)
+    (fact-iter 1 1 n)
+)
+
+(define (fact-iter product counter max-count)
+    (if (> counter max-count)
+        product
+        (fact-iter (* counter product) (+ counter 1) max-count)
+    )
+)
+
+; Здесь ситуация обратная
+
+
+
 
 (check-equal? (factorial 1) 1)
 (check-equal? (factorial 6) 720)
+(check-equal? (factorial2 1) 1)
+(check-equal? (factorial2 6) 720)
+(check-equal? (factorial3 1) 1)
+(check-equal? (factorial3 6) 720)

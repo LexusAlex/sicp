@@ -2,9 +2,9 @@ build:
 	docker build -t sicp .
 init:
 	docker run --name sicp -d -it -v "$(PWD)":/sicp sicp /bin/bash
-start:
+up:
 	docker start sicp
-stop:
+down:
 	docker stop sicp
 test-racket:
 	docker exec -i sicp /bin/bash -c "raco test racket/$(p)"
