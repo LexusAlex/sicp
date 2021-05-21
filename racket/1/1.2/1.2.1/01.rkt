@@ -36,7 +36,7 @@
     )
     (iter 1 1)
 )
-
+; еще вариант
 (define (factorial3 n)
     (fact-iter 1 1 n)
 )
@@ -48,8 +48,34 @@
     )
 )
 
-; Здесь ситуация обратная
+; просто итеративный процесс-цикл
+(define (test-iter i)
+    (define (iter i counter)
+        (if (>= counter i)
+            counter
+            (iter i (+ counter 1)
+            )
+        )
+    )
+    (iter 100 i)
+)
 
+; в обратную сторону
+(define (test-iter-min i)
+    (define (iter i counter)
+        (if (<= counter i)
+            counter
+            (iter i (- counter 1)
+            )
+        )
+    )
+    (iter 10 i)
+)
+
+
+; Здесь ситуация обратная, на каждом шаге необходимо помнить текущее состояние переменных - этот процесс называется итеративным.
+; При выполнении процесса задается конечное число переменных состояния, и правила изменения этих состояний
+; число шагов растет с ростом n
 
 
 
@@ -59,3 +85,5 @@
 (check-equal? (factorial2 6) 720)
 (check-equal? (factorial3 1) 1)
 (check-equal? (factorial3 6) 720)
+(check-equal? (test-iter 1) 100)
+(check-equal? (test-iter-min 0) 0)
