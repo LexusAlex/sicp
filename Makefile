@@ -1,16 +1,21 @@
+# Скачать обновления и собрать образы
 build:
-	docker build -t sicp .
-init:
-	docker run --name sicp -d -it -v "$(PWD)":/sicp sicp /bin/bash
+	docker-compose build --pull
+# Запуск контейнеров
 up:
-	docker start sicp
+	docker-compose up -d
+# Остановить и удалить все контейнеры с префиксом sicp
 down:
-	docker stop sicp
+	docker-compose down --remove-orphans
+# Остановка, удаление контейнеров и удаление томов
+down-clear:
+	docker-compose down -v --remove-orphans
+# Перезапустить контейнеры
+restart:
+	docker-compose restart
+# Удалить вообще все, что есть в системе
+remove-all-system:
+	docker system prune -a
+# Запуск файла в sicp контейнере
 test-racket:
-	docker exec -i sicp /bin/bash -c "raco test racket/$(p)"
-phpunit:
-	docker exec -i php-tests /bin/bash -c "vendor/bin/phpunit"
-php-run:
-	docker exec -i php-tests /bin/bash -c "php index.php"
-update:
-	docker pull phpearth/php:7.3-cli
+	docker-compose run --rm sicp /bin/bash -c "raco test racket/$(p)"

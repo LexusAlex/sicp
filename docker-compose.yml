@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+    sicp:
+        build:
+            context: ./docker/sicp
+            dockerfile: Dockerfile
+        volumes:
+            - ./:/sicp
