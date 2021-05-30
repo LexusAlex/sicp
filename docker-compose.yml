@@ -6,3 +6,9 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./:/sicp
+    node:
+        build:
+            context: ./docker/node
+            dockerfile: Dockerfile
+        volumes:
+        -  ./:/sicp
